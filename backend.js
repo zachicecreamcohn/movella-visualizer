@@ -1,4 +1,4 @@
-//import xsensManager, { PAYLOAD_TYPE } from "@vliegwerk/xsens-dot";
+import xsensManager, { PAYLOAD_TYPE } from "@vliegwerk/xsens-dot";
 import { Server } from "socket.io";
 
 import express from "express";
@@ -7,29 +7,29 @@ import { createServer } from "node:http";
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-//const payloadType = PAYLOAD_TYPE.completeEuler;
+const payloadType = PAYLOAD_TYPE.completeEuler;
 
 app.use(express.static("./"));
-//xsensManager.on("dot", async (identifier) => {
-//  try {
-//    await xsensManager.connect(identifier);
-//    await xsensManager.subscribeMeasurement(identifier, payloadType);
-//    io.emit("registerNewSensor", { identifier });
-//  } catch (error) {
-//    console.error("Exception raised while connecting to Xsens DOT: ", error);
-//  }
-//});
-//
-//xsensManager.on("measurement", (identifier, data) => {
-//  console.log(`Measurement (${identifier}):`, data);
-//  io.emit("sensorData", { identifier, data });
-//});
-//
-//process.on("SIGINT", async () => {
-//  console.log("Disconnecting from all devices and exiting...");
-//  await xsensManager.disconnectAll();
-//  process.exit();
-//});
+xsensManager.on("dot", async (identifier) => {
+  try {
+    await xsensManager.connect(identifier);
+    await xsensManager.subscribeMeasurement(identifier, payloadType);
+    io.emit("registerNewSensor", { identifier });
+  } catch (error) {
+    console.error("Exception raised while connecting to Xsens DOT: ", error);
+  }
+});
+
+xsensManager.on("measurement", (identifier, data) => {
+  console.log(`Measurement (${identifier}):`, data);
+  io.emit("sensorData", { identifier, data });
+});
+
+process.on("SIGINT", async () => {
+  console.log("Disconnecting from all devices and exiting...");
+  await xsensManager.disconnectAll();
+  process.exit();
+});
 
 function mockData() {
   const data = {

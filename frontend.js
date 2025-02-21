@@ -23,7 +23,7 @@ function addCanvas(identifier) {
   const canvas = document.createElement("canvas");
   canvas.setAttribute("sensor", identifier);
   canvas.width = 500;
-  canvas.height = 200;
+  canvas.height = 400;
   document.getElementById("canvas-container").appendChild(canvas);
   return canvas;
 }
@@ -63,20 +63,20 @@ function setupSmoothie(identifier) {
 
   smoothie.addTimeSeries(freeAccelerationX, {
     strokeStyle: "#0062ff",
-    lineWidth: 3,
+    lineWidth: 1,
   });
   smoothie.addTimeSeries(freeAccelerationY, {
     strokeStyle: "#e600ff",
-    lineWidth: 3,
+    lineWidth: 1,
   });
   smoothie.addTimeSeries(freeAccelerationZ, {
     strokeStyle: "#ff0000",
-    lineWidth: 3,
+    lineWidth: 1,
   });
-  smoothie.addTimeSeries(quaternionW, { strokeStyle: "#ff9500", lineWidth: 3 });
-  smoothie.addTimeSeries(quaternionX, { strokeStyle: "#ffffff", lineWidth: 3 });
-  smoothie.addTimeSeries(quaternionY, { strokeStyle: "#4dff00", lineWidth: 3 });
-  smoothie.addTimeSeries(quaternionZ, { strokeStyle: "#00c8ff", lineWidth: 3 });
+  smoothie.addTimeSeries(quaternionW, { strokeStyle: "#ff9500", lineWidth: 1 });
+  smoothie.addTimeSeries(quaternionX, { strokeStyle: "#ffffff", lineWidth: 1 });
+  smoothie.addTimeSeries(quaternionY, { strokeStyle: "#4dff00", lineWidth: 1 });
+  smoothie.addTimeSeries(quaternionZ, { strokeStyle: "#00c8ff", lineWidth: 1 });
 
   return smoothie;
 }
